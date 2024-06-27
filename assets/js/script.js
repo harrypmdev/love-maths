@@ -26,7 +26,10 @@ function runGame(gameType) {
     let num2 = Math.floor(Math.random() * 25) + 1;
     switch (gameType) {
         case "addition":
-            displayAdditionQuestion(num1, num2)
+            displayAdditionQuestion(num1, num2);
+            break;
+        case "multiply":
+            displayMultiplyQuestion(num1, num2);
             break;
         default:
             alert(`Unknown game type: ${gameType}`);
@@ -40,7 +43,6 @@ function checkAnswer() {
     let userAnswer = parseInt(document.getElementById('answer-box').value);
     let calculatedAnswer = calculateCorrectAnswer();
     let isCorrect = userAnswer === calculatedAnswer[0];
-    console.log(calculatedAnswer[0], calculatedAnswer[1])
     if (isCorrect) {
         alert('Hey! You got it right.');
         incrementScore();
@@ -48,7 +50,6 @@ function checkAnswer() {
         alert(`Wrong answer! You answered ${userAnswer}. The correct answer was ${calculatedAnswer[0]}`)
         incrementWrongAnswer();
     }
-    console.log("test2");
     runGame(calculatedAnswer[1]);
 }
 
@@ -64,6 +65,9 @@ function calculateCorrectAnswer() {
     switch (operator) {
         case '+':
             return [operand1 + operand2, "addition"];
+            break;
+        case 'x':
+            return [operand1 * operand2, "multiply"];
             break;
         default:
             alert(`Unimplemented operator ${operator}`);
@@ -97,6 +101,8 @@ function displaySubtractQuestion() {
 
 }
 
-function displayMultiplyQuestion() {
-
+function displayMultiplyQuestion(operand1, operand2) {
+    document.getElementById('operand1').textContent = operand1;
+    document.getElementById('operand2').textContent = operand2;
+    document.getElementById('operator').textContent = "x";
 }
